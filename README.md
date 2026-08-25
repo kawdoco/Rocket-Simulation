@@ -1,8 +1,8 @@
-# 🚀 Rocket Flight Simulator 🚀
+#                                                       🚀 Rocket Flight Simulator 🚀
 
 > A Python-based rocket flight simulation application with an interactive graphical user interface and edit structure.
 
-## 🌟 About the Project
+##  About the Project
 
 **Rocket Flight Simulator** is a Python application that simulates the flight of different types of rockets.
 
@@ -12,7 +12,7 @@ The simulator provides important flight information including **maximum apogee, 
 
 ---
 
-## ✨ Features
+##  Features
 
 *  Choose from multiple rocket presets
 *  Adjust the rocket launch angle
@@ -28,9 +28,9 @@ The simulator provides important flight information including **maximum apogee, 
 
 ---
 
-# 🖼️ Application Preview
+#  Application Preview
 
-## 🚀 Rocket Selection Screen
+##  Rocket Selection Screen
 
 Select a rocket type and adjust the launch angle before starting the simulation. 
 
@@ -112,14 +112,14 @@ python main.py
 
 ---
 
-## 🎮 How to Use
+##  How to Use
 
-1. 🚀 Open the application.
+1.  Open the application.
 2. Select a rocket preset.
-3. 🎯 Adjust the launch angle using the slider.
+3.  Adjust the launch angle using the slider.
 4. Click **Launch Rocket**.
 5. Watch the rocket flight animation.
-6. 📊 Analyze the flight data and graphs.
+6.  Analyze the flight data and graphs.
 7. Click **Back** to return to the selection screen.
 8. Try different rockets and launch angles.
 
@@ -129,10 +129,10 @@ python main.py
 
 | Rocket            | Description                                 |
 | ----------------- | ------------------------------------------- |
-| 🎓 Student Rocket | Small amateur rocket with low thrust        |
-| 🏎️ Sport Rocket  | Mid-size high-power rocket                  |
-| 💪 Heavy Rocket   | Large rocket with high thrust               |
-| ⚡ Racing Dart     | Ultralight rocket with extreme acceleration |
+| -Student Rocket | Small amateur rocket with low thrust        |
+| -Sport Rocket  | Mid-size high-power rocket                  |
+| -Heavy Rocket   | Large rocket with high thrust               |
+| - Racing Dart     | Ultralight rocket with extreme acceleration |
 
 ---
 
@@ -150,7 +150,7 @@ The simulator provides:
 
 ---
 
-## 🎓 Academic Group Project
+##  Academic Group Project
 
 This project was developed as an academic group project to demonstrate:
 
