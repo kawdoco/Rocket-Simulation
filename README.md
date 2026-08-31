@@ -34,7 +34,7 @@ The simulator provides important flight information including **maximum apogee, 
 
 Select a rocket type and adjust the launch angle before starting the simulation. 
 
-![Rocket Selection Screen](Rocket_choose.png)
+![Rocket Selection Screen](choose.png)
 
 ---
 
@@ -42,7 +42,7 @@ Select a rocket type and adjust the launch angle before starting the simulation.
 
 After launching the rocket, the application displays the rocket flight animation together with detailed flight data and graphs.
 
-![Rocket Simulation Results](Rocket_animation.png)
+![Rocket Simulation Results](animation.png)
 
 ---
 
