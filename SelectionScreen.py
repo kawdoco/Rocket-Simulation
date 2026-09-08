@@ -1,10 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-from BaseScreen import BaseScreen
 from Rocket import PRESETS
 
 
-class SelectionScreen(BaseScreen):
+class SelectionScreen(ttk.Frame):
     """
     Advanced Space-themed Rocket Selection Screen using OOP concepts.
     Provides custom styling, dynamic preset previewing, and configuration.
