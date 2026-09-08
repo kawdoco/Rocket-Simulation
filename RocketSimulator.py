@@ -20,48 +20,18 @@ class RocketSimulator:
 
     def get_mass(self, t):
         """
-        Calculates the current mass of the rocket accounting for propellant burnoff
-
-        Parameters:
-        ----------
-        t : float
-            Current time in seconds
-
-        Returns:
-        -----------
-        mass : float
-            Current mass in kg
+        Delegates to the rocket itself — the simulator doesn't need to
+        know HOW mass is computed, just that the vehicle can report it.
         """
-        # If propellant has already burned out
-        if t > self.rocket.burn_time:
-            return self.rocket.dry_mass
-
-        # Propellant consumption rate (kg/s)
-        mass_flow_rate = self.rocket.propellant_mass / self.rocket.burn_time
-
-        # How much propellant has burned in time t
-        fuel_burned = mass_flow_rate * t
-
-        # Current mass = initial mass - burned propellant
-        return self.rocket.total_mass - fuel_burned
+        return self.rocket.mass_at(t)
 
     def get_thrust(self, t):
         """
-        Returns engine thrust at time t
-
-        Parameters:
-        ----------
-        t : float
-            Current time in seconds
-
-        Returns:
-        -----------
-        thrust : float
-            Thrust in Newtons
+        Delegates to the rocket itself — different Vehicle subclasses
+        (e.g. BoosterRocket) can return different thrust behavior here
+        without RocketSimulator needing any special-case code.
         """
-        if t <= self.rocket.burn_time:
-            return self.rocket.thrust
-        return 0.0  # Engine off
+        return self.rocket.thrust_at(t)
 
     def derivatives(self, state, t):
         """
