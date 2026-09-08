@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-from BaseScreen import BaseScreen
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -11,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 plt.style.use('dark_background')
 
 
-class SimulationScreen(BaseScreen):
+class SimulationScreen(ttk.Frame):
     """
     Advanced Space-Themed 3D Visualization Screen with fixed 3D view (no rotation)
     and enhanced visual glow/trail effects for maximum attraction.

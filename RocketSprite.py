@@ -33,7 +33,7 @@ class RocketSprite:
         [-0.10, -0.55],
     ])
 
-    def __init__(self, ax, body_color="#A08D23", nose_color="#3D2691"):
+    def __init__(self, ax, body_color="#d8d8d8", nose_color="#c0392b"):
         self.ax = ax
         self.scale = 1.0
 
@@ -41,7 +41,7 @@ class RocketSprite:
                                    facecolor=body_color, edgecolor="black",
                                    linewidth=1.0, zorder=5)
         self.flame_patch = Polygon(self._FLAME, closed=True,
-                                    facecolor="#a03b65", edgecolor="none",
+                                    facecolor="#ff8c00", edgecolor="none",
                                     zorder=4, visible=False)
         ax.add_patch(self.body_patch)
         ax.add_patch(self.flame_patch)
