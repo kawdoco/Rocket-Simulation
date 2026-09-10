@@ -33,6 +33,20 @@ class RocketSprite:
         [-0.10, -0.55],
     ])
 
+    _STRIPE_1 = np.array([
+        [-0.16, -0.05],
+        [0.16, -0.05],
+        [0.16, -0.11],
+        [-0.16, -0.11],
+    ])
+
+    _STRIPE_2 = np.array([
+        [-0.16, -0.15],
+        [0.16, -0.15],
+        [0.16, -0.21],
+        [-0.16, -0.21],
+    ])
+
     def __init__(self, ax, body_color="#d8d8d8", nose_color="#c0392b"):
         self.ax = ax
         self.scale = 1.0
@@ -43,8 +57,15 @@ class RocketSprite:
         self.flame_patch = Polygon(self._FLAME, closed=True,
                                     facecolor="#ff8c00", edgecolor="none",
                                     zorder=4, visible=False)
+        self.stripe1_patch = Polygon(self._STRIPE_1, closed=True,
+                                      facecolor="#c0392b", edgecolor="none", zorder=6)
+        self.stripe2_patch = Polygon(self._STRIPE_2, closed=True,
+                                      facecolor="#c0392b", edgecolor="none", zorder=6)
+
         ax.add_patch(self.body_patch)
         ax.add_patch(self.flame_patch)
+        ax.add_patch(self.stripe1_patch)
+        ax.add_patch(self.stripe2_patch)
 
     def set_scale(self, scale):
         """Rocket icon size in data units (call this after axis limits are known)."""
@@ -65,6 +86,12 @@ class RocketSprite:
         body_pts = self._transform(self._BODY * self.scale, -heading, x, y)
         self.body_patch.set_xy(body_pts)
 
+        stripe1_pts = self._transform(self._STRIPE_1 * self.scale, -heading, x, y)
+        self.stripe1_patch.set_xy(stripe1_pts)
+
+        stripe2_pts = self._transform(self._STRIPE_2 * self.scale, -heading, x, y)
+        self.stripe2_patch.set_xy(stripe2_pts)
+
         if engine_on:
             flame_pts = self._transform(self._FLAME * self.scale, -heading, x, y)
             self.flame_patch.set_xy(flame_pts)
@@ -73,4 +100,4 @@ class RocketSprite:
             self.flame_patch.set_visible(False)
 
     def artists(self):
-        return [self.body_patch, self.flame_patch]
+        return [self.body_patch, self.flame_patch, self.stripe1_patch, self.stripe2_patch]
