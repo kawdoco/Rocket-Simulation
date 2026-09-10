@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d import Axes3D
+from RocketSprite import RocketSprite
 
 # Dark Space Plot Theme Configuration
 plt.style.use('dark_background')
@@ -63,7 +64,7 @@ class SimulationScreen(ttk.Frame):
         self.fig = plt.Figure(figsize=(12, 6), facecolor="#0a0e1a")
         
         # 1. 3D Space Trajectory Plot (Left Subplot)
-        self.ax3d = self.fig.add_subplot(121, projection='3d', facecolor="#0a0e1a")
+        self.ax3d = self.fig.add_subplot(221, projection='3d', facecolor="#0a0e1a")
         
         # Disable Mouse Interaction (Lock view position permanently - Static Camera Angle)
         self.ax3d.disable_mouse_rotation() 
@@ -72,7 +73,10 @@ class SimulationScreen(ttk.Frame):
         # 2. Altitude Graph (Top Right Subplot)
         self.ax_alt = self.fig.add_subplot(222, facecolor="#121829")
         
-        # 3. Velocity Graph (Bottom Right Subplot)
+        # 3. Rocket Side-Profile View (Bottom Left Subplot) — home for the rocket sprite
+        self.ax_profile = self.fig.add_subplot(223, facecolor="#121829")
+
+        # 4. Velocity Graph (Bottom Right Subplot)
         self.ax_vel = self.fig.add_subplot(224, facecolor="#121829")
 
         self.fig.tight_layout(pad=3.0)
@@ -87,7 +91,7 @@ class SimulationScreen(ttk.Frame):
         y_data = self.results.get('y', [0] * len(x_data))
         z_data = self.results.get('z', self.results.get('altitude', []))
         vx_data = self.results.get('vx', [0] * len(x_data))
-        vz_data = self.results.get('vz', [0] * len(x_data))
+        vz_data = self.results.get('vy', [0] * len(x_data))
         vel_data = self.results.get('velocity', np.sqrt(np.array(vx_data)**2 + np.array(vz_data)**2))
 
         data_len = len(x_data) if x_data is not None else 0
@@ -118,6 +122,21 @@ class SimulationScreen(ttk.Frame):
         (self.rocket_marker,) = self.ax3d.plot([], [], [], color="#ff3366", marker="o", markersize=9, label="Rocket Core")
         self.ax3d.legend(loc="upper left", facecolor="#0a0e1a", edgecolor="#121829", fontsize=8)
 
+        # Rocket Side-Profile Panel Setup (Distance vs Altitude)
+        self.ax_profile.set_title("Side Profile View", color="#00f0ff", fontsize=10)
+        self.ax_profile.set_xlabel("Distance (m)", color="#a0aabb", fontsize=8)
+        self.ax_profile.set_ylabel("Altitude (m)", color="#a0aabb", fontsize=8)
+        self.ax_profile.grid(True, color="#1a233a", linestyle=":")
+        self.ax_profile.tick_params(colors='#a0aabb', labelsize=8)
+        if data_len > 0:
+            self.ax_profile.plot(x_data, z_data, color="#00f0ff", linestyle=":", alpha=0.3)
+            self.ax_profile.margins(x=0.05, y=0.1)
+            self.sprite = RocketSprite(self.ax_profile)
+            span = max(max(x_data) - min(x_data), max(z_data) - min(z_data), 1)
+            self.sprite.set_scale(span * 0.04)
+            self.sprite.update(x_data[0], z_data[0], 0, 1, engine_on=True)
+
+ 
         # Telemetry Graphs Setup
         self.ax_alt.set_title("Altitude vs Time", color="#00f0ff", fontsize=10)
         self.ax_alt.set_ylabel("Altitude (m)", color="#a0aabb", fontsize=8)
@@ -152,7 +171,11 @@ class SimulationScreen(ttk.Frame):
                     self.alt_line.set_data(time_data[:frame], z_data[:frame])
                     self.vel_line.set_data(time_data[:frame], vel_data[:frame])
 
-            return self.rocket_marker, self.active_trail, self.alt_line, self.vel_line
+                # Move the rocket sprite along the side-profile view
+                engine_on = time_data[frame] <= self.rocket.burn_time if len(time_data) == data_len else True
+                self.sprite.update(x_data[frame], z_data[frame], vx_data[frame], vz_data[frame], engine_on)
+
+            return self.rocket_marker, self.active_trail, self.alt_line, self.vel_line, *self.sprite.artists()
 
         if data_len > 0:
             self.anim = FuncAnimation(
