@@ -63,6 +63,9 @@ class Rocket(Vehicle):
     def __init__(self, preset: dict = None):
         p = preset or PRESETS[3]
 
+        if p["burn_time"] <= 0:
+            raise ValueError("burn_time must be greater than 0")
+
         # === ENCAPSULATION: private attributes, underscore prefix ===
         self._diameter = p["diameter"]
         self._length = p["length"]
