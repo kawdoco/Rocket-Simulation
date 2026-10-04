@@ -40,7 +40,7 @@ class SelectionScreen(BaseScreen):
         header_frame = ttk.Frame(self, style="Space.TFrame")
         header_frame.pack(fill=tk.X, padx=30, pady=(20, 10))
 
-        ttk.Label(header_frame, text="🚀 BCI ROCKET SIMULAT0R", style="Header.TLabel").pack(anchor=tk.W)
+        ttk.Label(header_frame, text="🚀 BCI ROCKET SIMULATOR", style="Header.TLabel").pack(anchor=tk.W)
         ttk.Label(header_frame, text="Select an orbital configuration preset & trajectory angle below.", style="SubHeader.TLabel").pack(anchor=tk.W, pady=(2, 0))
 
         # Main Layout
