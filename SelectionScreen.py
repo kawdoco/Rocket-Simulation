@@ -1,9 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
 from Rocket import PRESETS
+from BaseScreen import BaseScreen
 
 
-class SelectionScreen(ttk.Frame):
+class SelectionScreen(BaseScreen):
     """
     Advanced Space-themed Rocket Selection Screen using OOP concepts.
     Provides custom styling, dynamic preset previewing, and configuration.
@@ -39,7 +40,7 @@ class SelectionScreen(ttk.Frame):
         header_frame = ttk.Frame(self, style="Space.TFrame")
         header_frame.pack(fill=tk.X, padx=30, pady=(20, 10))
 
-        ttk.Label(header_frame, text="🚀 BCI ROCKET SIMULAT0R", style="Header.TLabel").pack(anchor=tk.W)
+        ttk.Label(header_frame, text="🚀 BCI ROCKET SIMULATOR", style="Header.TLabel").pack(anchor=tk.W)
         ttk.Label(header_frame, text="Select an orbital configuration preset & trajectory angle below.", style="SubHeader.TLabel").pack(anchor=tk.W, pady=(2, 0))
 
         # Main Layout
