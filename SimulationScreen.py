@@ -5,12 +5,13 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d import Axes3D
+from BaseScreen import BaseScreen
 
 # Dark Space Plot Theme Configuration
 plt.style.use('dark_background')
 
 
-class SimulationScreen(ttk.Frame):
+class SimulationScreen(BaseScreen):
     """
     Advanced Space-Themed 3D Visualization Screen with fixed 3D view (no rotation)
     and enhanced visual glow/trail effects for maximum attraction.
