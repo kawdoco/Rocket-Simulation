@@ -34,7 +34,7 @@ The simulator provides important flight information including **maximum apogee, 
 
 Select a rocket type and adjust the launch angle before starting the simulation. 
 
-![Rocket Selection Screen](choose.png)
+![Rocket Selection Screen](assets/choose.png)
 
 ---
 
@@ -42,7 +42,7 @@ Select a rocket type and adjust the launch angle before starting the simulation.
 
 After launching the rocket, the application displays the rocket flight animation together with detailed flight data and graphs.
 
-![Rocket Simulation Results](animation.png)
+![Rocket Simulation Results](assets/animation.png)
 
 ---
 
@@ -105,9 +105,10 @@ pip install -r requirements.txt
 ```
 
 ### 4. Run the application
+ (you must go to the terminal and run this code)
 
 ```bash
-python main.py
+python -m src.Main
 ```
 
 ---
