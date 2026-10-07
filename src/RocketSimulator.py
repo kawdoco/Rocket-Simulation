@@ -1,8 +1,8 @@
 import numpy as np
 from scipy.integrate import odeint
 
-from Rocket import Rocket
-from Atmosphere import Atmosphere
+from src.Rocket import Rocket
+from src.Atmosphere import Atmosphere
 
 class RocketSimulator:
 

@@ -2,10 +2,10 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import logging
 
-from Rocket import Rocket, PRESETS
-from RocketSimulator import RocketSimulator
-from SelectionScreen import SelectionScreen
-from SimulationScreen import SimulationScreen
+from src.Rocket import Rocket, PRESETS
+from src.RocketSimulator import RocketSimulator
+from src.SelectionScreen import SelectionScreen
+from src.SimulationScreen import SimulationScreen
 
 logging.basicConfig(level=logging.INFO)
 

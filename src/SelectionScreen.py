@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from Rocket import PRESETS
-from BaseScreen import BaseScreen
+from src.Rocket import PRESETS
+from src.BaseScreen import BaseScreen
 
 
 class SelectionScreen(BaseScreen):
