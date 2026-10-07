@@ -37,7 +37,6 @@ PRESETS = {
 }
 
 
-# ---------- ABSTRACTION ----------
 class Vehicle(ABC):
     """
     Abstract base class for anything that can fly in the simulation.
@@ -58,12 +57,11 @@ class Vehicle(ABC):
         raise NotImplementedError
 
 
-# ---------- INHERITANCE (Rocket inherits from Vehicle) ----------
+
 class Rocket(Vehicle):
     def __init__(self, preset: dict = None):
         p = preset or PRESETS[3]
 
-        # === ENCAPSULATION: private attributes, underscore prefix ===
         self._diameter = p["diameter"]
         self._length = p["length"]
         self._area = np.pi * (self._diameter / 2) ** 2
@@ -81,9 +79,6 @@ class Rocket(Vehicle):
         self._preset_name = p["name"]
         self._sim_duration = p["sim_duration"]
 
-    # === ENCAPSULATION: controlled read-only access via properties ===
-    # RocketSimulator still writes `rocket.thrust`, `rocket.cd`, etc. —
-    # these just route that through a private attribute now.
     @property
     def diameter(self): return self._diameter
 
@@ -120,7 +115,6 @@ class Rocket(Vehicle):
     @property
     def sim_duration(self): return self._sim_duration
 
-    # === implements Vehicle's abstract methods ===
     def mass_at(self, t: float) -> float:
         if t > self._burn_time:
             return self._dry_mass
@@ -144,17 +138,7 @@ class Rocket(Vehicle):
         print(f"Thrust/Weight:  {self._thrust / (self._total_mass * 9.81):.2f}")
         print("=" * (28 + len(self._preset_name)) + "\n")
 
-
-# ---------- POLYMORPHISM (overrides thrust_at differently) ----------
 class BoosterRocket(Rocket):
-    """
-    A rocket whose engine has an ignition delay before it fires.
-
-    Inheritance: reuses everything from Rocket.
-    Polymorphism: RocketSimulator calls thrust_at(t) the same way for
-    any Vehicle — it doesn't need special-case code to know this is a
-    BoosterRocket instead of a plain Rocket.
-    """
 
     def __init__(self, preset: dict = None, ignition_delay: float = 1.0):
         super().__init__(preset)

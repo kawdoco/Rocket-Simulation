@@ -6,24 +6,20 @@ from matplotlib.patches import Polygon
 
 
 class RocketSprite:
-    """
-    Draws a small rocket icon (nose cone + body + fins + engine flame) on a
-    matplotlib Axes and rotates it to face the current velocity vector.
-    """
 
-    # Local sprite geometry, nose points along +Y and origin is centered.
+
     _BODY = np.array(
         [
-            [0.00, 1.00],   # nose tip
-            [0.18, 0.55],   # right shoulder
-            [0.18, -0.35],  # right body edge
-            [0.32, -0.55],  # right fin tip
-            [0.12, -0.35],  # right fin inner
-            [0.00, -0.55],  # engine base (centre)
-            [-0.12, -0.35], # left fin inner
-            [-0.32, -0.55], # left fin tip
-            [-0.18, -0.35], # left body edge
-            [-0.18, 0.55],  # left shoulder
+            [0.00, 1.00],  
+            [0.18, 0.55],  
+            [0.18, -0.35],  
+            [0.32, -0.55], 
+            [0.12, -0.35], 
+            [0.00, -0.55],  
+            [-0.12, -0.35], 
+            [-0.32, -0.55], 
+            [-0.18, -0.35],
+            [-0.18, 0.55], 
         ],
         dtype=float,
     )
@@ -69,7 +65,6 @@ class RocketSprite:
         self.body_color = body_color
 
     def set_scale(self, scale: float) -> None:
-        """Rocket icon size in data units; call after axis limits are known."""
         if not np.isfinite(scale) or scale <= 0:
             raise ValueError("scale must be a positive finite number")
         self.scale = float(scale)
@@ -87,11 +82,10 @@ class RocketSprite:
         return points @ rotation.T + np.array([tx, ty], dtype=float)
 
     def update(self, x: float, y: float, vx: float, vy: float, engine_on: bool) -> None:
-        """Move + rotate the sprite so its nose aligns with the velocity vector."""
         speed = np.hypot(vx, vy)
 
         if speed > 1e-6:
-            # Nose begins at +Y in local coordinates and follows velocity direction.
+          
             heading = np.degrees(np.arctan2(vx, vy))
         else:
             heading = 0.0

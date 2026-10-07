@@ -5,19 +5,13 @@ from BaseScreen import BaseScreen
 
 
 class SelectionScreen(BaseScreen):
-    """
-    Advanced Space-themed Rocket Selection Screen using OOP concepts.
-    Provides custom styling, dynamic preset previewing, and configuration.
-    """
+   
 
     def __init__(self, parent, on_launch):
         super().__init__(parent)
         self.on_launch = on_launch
-        
-        # Keep native keys list for reference
         self.preset_keys = list(PRESETS.keys())
         
-        # Use IntVar to store index or type-safe selection
         self.selected_index = tk.IntVar(value=0)
         self.launch_angle = tk.DoubleVar(value=45.0)
 
@@ -36,24 +30,21 @@ class SelectionScreen(BaseScreen):
     def _build_ui(self):
         self.configure(style="Space.TFrame")
 
-        # Top Banner
         header_frame = ttk.Frame(self, style="Space.TFrame")
         header_frame.pack(fill=tk.X, padx=30, pady=(20, 10))
 
         ttk.Label(header_frame, text="🚀 BCI ROCKET SIMULATOR", style="Header.TLabel").pack(anchor=tk.W)
         ttk.Label(header_frame, text="Select an orbital configuration preset & trajectory angle below.", style="SubHeader.TLabel").pack(anchor=tk.W, pady=(2, 0))
 
-        # Main Layout
         main_container = ttk.Frame(self, style="Space.TFrame")
         main_container.pack(fill=tk.BOTH, expand=True, padx=30, pady=10)
 
-        # Left Column: Presets & Controls
+    
         left_panel = ttk.Frame(main_container, style="Space.TFrame")
         left_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 15))
 
         ttk.Label(left_panel, text="CHOOSE ROCKET PRESET", style="SubHeader.TLabel").pack(anchor=tk.W, pady=(0, 10))
 
-        # Radio Selectors for Presets
         for idx, preset_key in enumerate(self.preset_keys):
             card = ttk.Frame(left_panel, style="Card.TFrame", padding=10)
             card.pack(fill=tk.X, pady=5)
@@ -74,7 +65,6 @@ class SelectionScreen(BaseScreen):
             )
             rb.pack(fill=tk.X)
 
-        # Launch Angle Slider
         angle_card = ttk.Frame(left_panel, style="Card.TFrame", padding=15)
         angle_card.pack(fill=tk.X, pady=(15, 0))
 
@@ -93,7 +83,6 @@ class SelectionScreen(BaseScreen):
         )
         angle_slider.pack(fill=tk.X)
 
-        # Right Column: Specification Preview
         self.right_panel = ttk.Frame(main_container, style="Card.TFrame", padding=20)
         self.right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=(15, 0))
 
@@ -102,7 +91,6 @@ class SelectionScreen(BaseScreen):
         self.specs_label = ttk.Label(self.right_panel, text="", style="CardLabel.TLabel", font=("Courier", 10))
         self.specs_label.pack(anchor=tk.W, fill=tk.BOTH, expand=True)
 
-        # Bottom Action Bar
         action_bar = ttk.Frame(self, style="Space.TFrame")
         action_bar.pack(fill=tk.X, padx=30, pady=20)
 
