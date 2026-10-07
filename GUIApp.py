@@ -11,10 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 class App:
-    """
-    Space Flight Controller App - Core Navigation & Lifecycle Manager.
-    Uses Encapsulation to safely transition between space UI screens.
-    """
+   
 
     def __init__(self):
         self._root = tk.Tk()
