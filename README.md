@@ -105,10 +105,9 @@ pip install -r requirements.txt
 ```
 
 ### 4. Run the application
- (you must go to the terminal and run this code)
 
 ```bash
-python -m src.Main
+run.py
 ```
 
 ---
